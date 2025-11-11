@@ -1,4 +1,4 @@
-# 👋 ¡Hola! Soy Daniel López
+# 👋 ¡Hola! Soy Daniel López de la Torre
 
 Desarrollador front-end con especialización en **accesibilidad digital (WAI:WCAG 2.2, UNE-EN 301549:2022)**.  
 Me apasiona crear interfaces inclusivas, limpias y funcionalmente correctas.
