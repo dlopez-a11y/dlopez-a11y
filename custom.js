@@ -13,93 +13,162 @@ $(document).ready(() => {
     }, 1);
 });
 
+'use strict';
+
+class Popup {
+    constructor(domNode) {
+        var container;
+
+        container = document.createElement('span');
+        container.classList.add('popup-container');
+        domNode.after(container);
+        container.append(domNode);
+
+        // Get the message from the title or data-popover element
+        if (domNode.hasAttribute('title')) {
+            container.innerHTML += '<span role="tooltip" aria-hidden="true"><span>' + domNode.getAttribute('title') + '</span></span>';
+            domNode = container.querySelector('[title]');
+        }
+
+        if (domNode.hasAttribute('data-popover')) {
+            container.innerHTML += '<span role="status"><span></span></span>';
+            domNode = container.querySelector('[data-popover]');
+            domNode.setAttribute('aria-pressed', false);
+        }
+    }
+}
+
+class Tooltip {
+    constructor(domNode) {
+        this.tooltipNode = domNode;
+        this.tooltipNode.parentNode.addEventListener('mouseover', () => this.onMouseover(event));
+        this.tooltipNode.parentNode.addEventListener('mouseleave', () => this.onMouseleave(event));
+        this.tooltipNode.addEventListener('focus', () => this.onFocus(event));
+        this.tooltipNode.addEventListener('blur', () => this.onBlur(event));
+        document.addEventListener('keydown', () => this.onKeydown(event));
+        domNode.removeAttribute('title');
+    }
+
+    // Toggle the message
+    onMouseover(event) {
+        event.currentTarget.classList.add('hover');
+    }
+
+    onMouseleave(event) {
+        event.currentTarget.classList.remove('hover');
+    }
+
+    // Close on outside
+    onFocus(event) {
+        event.currentTarget.classList.add('focused');
+    }
+
+    onBlur(event) {
+        event.currentTarget.classList.remove('focused');
+    }
+
+    // Remove tooltip on ESC
+    onKeydown(event) {
+        if ((event.keyCode || event.which) === 27) {
+            Array.from(document.querySelectorAll('.popup-container')).forEach((el) => {
+                el.classList.remove('hover');
+                el.firstChild.classList.remove('focused');
+            });
+        }
+    }
+}
+
+class Popover {
+    constructor(domNode) {
+        this.popoverNode = domNode;
+        this.popoverNode.addEventListener('click', () => this.onClick(event));
+        document.addEventListener('click', () => this.onClickOut(event));
+        document.addEventListener('keydown', () => this.onKeydown(event));
+    }
+
+    // Toggle the message
+    onClick(event) {
+        if (event.currentTarget.parentNode.classList.contains('open')) {
+            event.currentTarget.parentNode.classList.remove('open');
+            event.currentTarget.parentNode.querySelector('[role="status"]').querySelector('span').innerText = '';
+        } else {
+            event.currentTarget.parentNode.classList.add('open');
+            var el = event.currentTarget.parentNode.querySelector('[role="status"]').querySelector('span');
+            var text = event.currentTarget.dataset.popover;
+            setTimeout(() => {
+                el.innerText = text;
+            }, 1);
+        }
+    }
+
+    // Close on outside click
+    onClickOut(event) {
+        Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
+            if (!el.parentNode.contains(event.target)) {
+                el.parentNode.classList.remove('open');
+                el.parentNode.querySelector('[role="status"]').querySelector('span').innerText = '';
+                el.setAttribute('aria-pressed', false);
+            }
+        });
+    }
+
+    // Remove popover on ESC
+    onKeydown(event) {
+        if ((event.keyCode || event.which) === 27) {
+            Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
+                el.parentNode.classList.remove('open');
+                el.parentNode.querySelector('[role="status"]').querySelector('span').innerText = '';
+                el.setAttribute('aria-pressed', false);
+            });
+        }
+    }
+}
+
+class Pressed {
+    constructor(domNode) {
+        this.switchNode = domNode;
+        this.switchNode.addEventListener('click', () => this.onClick(event));
+    }
+
+    onClick(event) {
+        if (event.currentTarget.getAttribute('aria-pressed') === 'true') {
+            event.currentTarget.setAttribute('aria-pressed', false);
+        } else {
+            event.currentTarget.setAttribute('aria-pressed', true);
+        }
+    }
+}
+
+class PasswordViewer {
+    constructor(domNode) {
+        this.switchNode = domNode;
+        this.switchNode.addEventListener('click', () => this.onClick(event));
+    }
+
+    onClick(event) {
+        if (event.currentTarget.getAttribute('aria-pressed') === 'false') {
+            event.currentTarget.setAttribute('aria-label', 'Mostrar contraseña');
+            event.currentTarget.parentNode.lastChild.lastChild.innerText = 'Mostrar contraseña';
+            event.currentTarget.firstChild.classList.add('bi-eye');
+            event.currentTarget.firstChild.classList.remove('bi-eye-slash');
+            document.getElementById(event.currentTarget.dataset.target).setAttribute('type', 'password');
+        } else {
+            event.currentTarget.setAttribute('aria-label', 'Ocultar contraseña');
+            event.currentTarget.parentNode.lastChild.lastChild.innerText = 'Ocultar contraseña';
+            event.currentTarget.firstChild.classList.add('bi-eye-slash');
+            event.currentTarget.firstChild.classList.remove('bi-eye');
+            document.getElementById(event.currentTarget.dataset.target).setAttribute('type', 'text');
+        }
+    }
+}
+
 (function () {
     window.setTimeout(() => {
         // Iterate over them
-        Array.from(document.querySelectorAll('[title]')).forEach((el) => {
-            // Get the message from the data-content element
-            var tooltipContainer = document.createElement('span');
-            tooltipContainer.classList.add('tooltip-container');
-
-            el.after(tooltipContainer);
-            tooltipContainer.append(el);
-            tooltipContainer.innerHTML += '<span role="tooltip" aria-hidden="true"><span>' + el.getAttribute('title') + '</span></span>';
-            el = tooltipContainer.querySelector('[title]');
-            el.removeAttribute('title');
-
-            // Toggle the message
-            tooltipContainer.addEventListener('mouseover', function (e) {
-                tooltipContainer.classList.add('hover');
-            });
-
-            tooltipContainer.addEventListener('mouseleave', function (e) {
-                tooltipContainer.classList.remove('hover');
-            });
-
-            // Close on outside
-            el.addEventListener('focus', function (e) {
-                el.classList.add('focused');
-            });
-
-            el.addEventListener('blur', function (e) {
-                el.classList.remove('focused');
-            });
-
-            // Remove tooltip on ESC
-            document.addEventListener('keydown', function (e) {
-                if ((e.keyCode || e.which) === 27) {
-                    tooltipContainer.classList.remove('hover');
-                    el.classList.remove('focused');
-                }
-            });
-        });
-
-        // Iterate over them
-        Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
-            // Get the message from the data-content element
-            var popoverContainer = document.createElement('span');
-            popoverContainer.classList.add('popover-container');
-
-            el.after(popoverContainer);
-            popoverContainer.append(el);
-            popoverContainer.innerHTML += '<span role="status"><span></span></span>';
-            el = popoverContainer.querySelector('[data-popover]');
-
-            // Get the live region element
-            var liveRegion = popoverContainer.querySelector('[role="status"]').querySelector('span');
-
-            // Toggle the message
-            el.addEventListener('click', e => {
-                if (popoverContainer.classList.contains('open')) {
-                    popoverContainer.classList.remove('open');
-                    liveRegion.innerText = '';
-                    el.setAttribute('aria-pressed', false);
-                } else {
-                    popoverContainer.classList.add('open');
-                    window.setTimeout(() => {
-                        liveRegion.innerText = el.getAttribute('data-popover');
-                    }, 1);
-                    el.setAttribute('aria-pressed', true);
-                }
-            });
-
-            // Close on outside click
-            document.addEventListener('click', e => {
-                if (!popoverContainer.contains(e.target)) {
-                    popoverContainer.classList.remove('open');
-                    liveRegion.innerText = '';
-                    el.setAttribute('aria-pressed', false);
-                }
-            });
-
-            // Remove popover on ESC
-            document.addEventListener('keydown', function (e) {
-                if ((e.keyCode || e.which) === 27) {
-                    popoverContainer.classList.remove('open');
-                    liveRegion.innerText = '';
-                    el.setAttribute('aria-pressed', false);
-                }
-            });
-        });
+        Array.from(document.querySelectorAll('[title], [data-popover]')).forEach((el) => new Popup(el));
+        Array.from(document.querySelectorAll('[title]')).forEach((el) => new Tooltip(el));
+        Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => new Popover(el));
+        Array.from(document.querySelectorAll('[aria-pressed]')).forEach((el) => new Pressed(el));
+        Array.from(document.querySelectorAll('[type="password"] + * [aria-pressed]')).forEach((el) => new PasswordViewer(el));
     }, 100);
 }());

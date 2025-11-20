@@ -4,25 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplos de accesibilidad</title>
+    <title>A11Y - Ejemplos de accesibilidad</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="min-vh-100 vstack">
     <a href="#main"
         class="btn btn-primary fixed-top top-0 start-50 translate-middle-x mt-4 visually-hidden-focusable">Saltar
         al contenido principal</a>
     <div id="header" class="sticky-top"></div>
     <main id="main" class="py-5 text-bg-light">
         <div class="container vstack gap-3">
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing.</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae sit, suscipit eveniet assumenda nostrum
-                itaque harum, ex distinctio excepturi possimus odio commodi veniam dolorem. Minus reiciendis quam qui
-                exercitationem atque.</p>
-            <h2>Componentes accesibles</h2>
+            <h1 class="display-5 border-bottom pb-3">La importancia de la funcionalidad de los widgets</h1>
+            <p>Hay multitud de motivos para crear widgets personaliados. Pueden ser requisitos funcionales, estéticos,
+                apoyo adicional... Pero sea como fuere es importante que el componente en cuestión estña bien diseñado,
+                su estructura sea minimalista, semántica y en definitiva correcta. Su comportamiento debe estar a la
+                altura de lo que se espera de él, sin errores o funcionalidades adicionales no deseadas.</p>
+            <h2>Por qué son importantes los widgets personalizados para la accesibilidad</h2>
+            <ul>
+                <li><strong>Inclusión de usuarios con discapacidad:</strong> Permite que personas con discapacidades visuales, motoras,
+                    cognitivas o de procesamiento de información interactúen con la interfaz sin depender de controles
+                    nativos.
+                </li>
+                <li><strong>Consistencia y previsibilidad:</strong> Los widgets bien implementados siguen patrones conocidos (foco,
+                    lectura de teclado, roles ARIA) que reducen la carga cognitiva y facilitan la navegación.
+                </li>
+                <li><strong>Accesibilidad universal:</strong> No es solo para usuarios con discapacidad; mejora la experiencia para
+                    cualquier persona en dispositivos o contextos atenuados (lentes, pantallas pequeñas, alto estrés,
+                    etc.).
+                </li>
+            </ul>
+            <h2 class="border-bottom pb-3">Componentes accesibles</h2>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <div class="col">
                     <div class="card h-100">
@@ -37,15 +52,32 @@
                                 él.</p>
                         </div>
                         <div class="card-footer p-3">
-                            <a href="/tooltip-popover/index.html" class="btn btn-primary"
+                            <a href="/tooltip-popover/index.html" class="btn btn-primary stretched-link"
                                 aria-label="Consultar información sobre Tooltip y Popover">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header p-3">
+                            <h3 class="h5 mb-0">Conmutadores</h3>
+                        </div>
+                        <div class="card-body hstack gap-3">
+                            <img src="https://www.w3.org/WAI/content-images/wai-aria-practices/images/pattern-switch.svg"
+                                alt="">
+                            <p class="card-text">Un interruptor es un widget de entrada que permite a los usuarios
+                                elegir uno de dos valores: encendido o apagado.</p>
+                        </div>
+                        <div class="card-footer p-3">
+                            <a href="/switch/index.html" class="btn btn-primary stretched-link"
+                                aria-label="Consultar información sobre Conmutadores">Consultar</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <div id="footer"></div>
+    <div id="footer" class="mt-auto"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplos de accesibilidad</title>
+    <title>Tooltip y Popover | A11Y</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
 
-<body>
+<body class="min-vh-100 vstack">
     <a href="#main"
         class="btn btn-primary fixed-top top-0 start-50 translate-middle-x mt-4 visually-hidden-focusable">Saltar
         al contenido principal</a>
@@ -111,11 +111,11 @@
                                 </div>
                                 <div class="card-footer text-body-secondary p-3">
                                     <div class="bg-white border border-2 rounded-2">
-                                        <nav class="navbar bg-body-tertiary">
+                                        <nav class="navbar bg-body-tertiary rounded-top-2">
                                             <div class="container-fluid px-3">
                                                 <a class="navbar-brand" href="#">Logotipo</a>
                                                 <button type="button"
-                                                    class="btn btn-light lh-1 p-3 my-n2 me-n3 rounded-0 border-0 position-relative"
+                                                    class="btn btn-light lh-1 p-3 my-n2 me-n3 rounded-top-2 rounded-start-0 rounded-bottom-0 border-0 position-relative"
                                                     title="Notificaciones"><i class="bi bi-bell-fill fs-4" role="img"
                                                         aria-label="Notificaciones"></i>
                                                     <span
@@ -169,15 +169,16 @@
                                         </div>
                                         <div class="mb-3 form-check">
                                             <div class="hstack gap-2">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">Política de
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck">
+                                                <label class="form-check-label" for="exampleCheck"
+                                                    id="exampleCheckLabel">Política de
                                                     privacidad</label>
                                                 <button type="button"
                                                     class="btn btn-link link-dark p-1 lh-1 rounded-circle position-relative"
-                                                    aria-pressed="false"
-                                                    data-popover="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste dolore quaerat id aliquam, est architecto culpa illum explicabo sapiente reiciendis impedit molestiae libero adipisci autem vitae? Cupiditate vel dicta expedita?">
+                                                    data-popover="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste dolore quaerat id aliquam, est architecto culpa illum explicabo sapiente reiciendis impedit molestiae libero adipisci autem vitae? Cupiditate vel dicta expedita?"
+                                                    title="Más información">
                                                     <i class="bi bi-info-circle-fill fs-5" role="img"
-                                                        aria-label="Más información sobre..."></i>
+                                                        aria-label="Más información sobre Política de privacidad"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -189,146 +190,94 @@
                     </div>
 
                     <h2 class="border-bottom pb-3"><i class="bi bi-code-square"></i> Código generado</h2>
-                    <h3 class="h4 fw-bold">Tooltip</h3>
                     <div class="vstack gap-3">
                         <div class="card h-100 overflow-hidden">
                             <div class="card-header">
-                                <h4 class="card-title h5 mb-0">HTML</h4>
+                                <h3 class="card-title h5 mb-0">HTML</h3>
                             </div>
                             <pre class="card-body text-bg-dark mh-15 mb-0">
+&lt;!-- Tooltip --&gt;
+
 &lt;button type="button"
-    class="btn btn-light lh-1 p-3 my-n2 me-n3 rounded-0 border-0 position-relative"
+    class="btn btn-light lh-1 p-3 my-n2 me-n3 rounded-top-2 rounded-start-0 rounded-bottom-0 border-0 position-relative"
     title="Notificaciones"&gt;&lt;i class="bi bi-bell-fill fs-4" role="img"
         aria-label="Notificaciones"&gt;&lt;/i&gt;
     &lt;span
         class="position-absolute top-0 end-0 m-1 badge rounded-pill bg-danger"&gt;
         3 &lt;span class="visually-hidden"&gt;sin leer&lt;/span&gt;
     &lt;/span&gt;
-&lt;/button&gt;</pre>
-                        </div>
-                        <div class="card h-100 overflow-hidden">
-                            <div class="card-header">
-                                <h4 class="card-title h5 mb-0">CSS</h4>
-                            </div>
-                            <pre class="card-body text-bg-dark mh-15 mb-0">
-.tooltip-container [role="tooltip"] {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.9rem;
-    width: max-content;
-    max-width: 12.5em;
-    margin-left: 0.2rem;
-    z-index: 1;
-}
+&lt;/button&gt;
 
-.tooltip-container [role="tooltip"] span {
-    display: block;
-    padding: 0.25rem 0.5rem;
-    background: #000;
-    color: #fff;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 3px 0 #00000066;
-}
+&lt;!-- Popover --&gt;
 
-.tooltip-container [role="tooltip"]::before,
-.tooltip-container [role="tooltip"]::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    border: 0.25rem solid #000;
-    transform: translate(50%, -50%) rotate(45deg);
-}
-
-.tooltip-container [role="tooltip"]::after {
-    box-shadow: 0 0 3px 0 #00000066;
-    z-index: -1;
-}
-
-.tooltip-container {
-    display: inline-block;
-    position: relative;
-}
-
-.tooltip-container.hover:hover>[role="tooltip"],
-.tooltip-container>.focused:focus+[role="tooltip"] {
-    display: inline-block;
-}</pre>
-                        </div>
-                        <div class="card h-100 overflow-hidden">
-                            <div class="card-header">
-                                <h4 class="card-title h5 mb-0">JS</h4>
-                            </div>
-                            <pre class="card-body text-bg-dark mh-15 mb-0">
-// Iterate over them
-Array.from(document.querySelectorAll('[title]')).forEach((el) => {
-    // Get the message from the data-content element
-    var tooltipContainer = document.createElement('span');
-    tooltipContainer.classList.add('tooltip-container');
-
-    el.after(tooltipContainer);
-    tooltipContainer.append(el);
-    tooltipContainer.innerHTML += '<span role="tooltip" aria-hidden="true"><span>' + el.getAttribute('title') + '</span></span>';
-    el = tooltipContainer.querySelector('[title]');
-    el.removeAttribute('title');
-
-    // Toggle the message
-    tooltipContainer.addEventListener('mouseover', function (e) {
-        tooltipContainer.classList.add('hover');
-    });
-
-    tooltipContainer.addEventListener('mouseleave', function (e) {
-        tooltipContainer.classList.remove('hover');
-    });
-
-    // Close on outside
-    el.addEventListener('focus', function (e) {
-        el.classList.add('focused');
-    });
-
-    el.addEventListener('blur', function (e) {
-        el.classList.remove('focused');
-    });
-
-    // Remove tooltip on ESC
-    document.addEventListener('keydown', function (e) {
-        if ((e.keyCode || e.which) === 27) {
-            tooltipContainer.classList.remove('hover');
-            el.classList.remove('focused');
-        }
-    });
-});</pre>
-                        </div>
-                    </div>
-                    <h3 class="h4 fw-bold">Popover</h3>
-                    <div class="vstack gap-3">
-                        <div class="card h-100 overflow-hidden">
-                            <div class="card-header">
-                                <h4 class="card-title h5 mb-0">HTML</h4>
-                            </div>
-                            <pre class="card-body text-bg-dark mh-15 mb-0">
 &lt;button type="button"
     class="btn btn-link link-dark p-1 lh-1 rounded-circle position-relative"
     aria-pressed="false"
     data-popover="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste dolore quaerat id aliquam, est architecto culpa illum explicabo sapiente reiciendis impedit molestiae libero adipisci autem vitae? Cupiditate vel dicta expedita?"&gt;
     &lt;i&gt; class="bi bi-info-circle-fill fs-5" role="img"
-        aria-label="Más información sobre..."&gt;&lt;/i&gt;
-&lt;/button&gt;&lt;/pre&gt;
+        aria-label="Más información sobre Política de privacidad"&gt;&lt;/i&gt;
+&lt;/button&gt;</pre>
                         </div>
                         <div class="card h-100 overflow-hidden">
                             <div class="card-header">
-                                <h4 class="card-title h5 mb-0">CSS</h4>
+                                <h3 class="card-title h5 mb-0">CSS</h3>
                             </div>
                             <pre class="card-body text-bg-dark mh-15 mb-0">
+.popup-container {
+    display: inline-block;
+    position: relative;
+}
+
+/* Tooltip */
+
+.popup-container [role="tooltip"] {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    width: max-content;
+    max-width: 12.5em;
+    z-index: 5;
+}
+
+.popup-container [role="tooltip"] span {
+    display: block;
+    padding: 0.25rem 0.5rem;
+    background: #0f0f0f;
+    color: #f0f0f0;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 3px 0 #00000066;
+}
+
+.popup-container [role="tooltip"]::before,
+.popup-container [role="tooltip"]::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    border: 0.25rem solid #0f0f0f;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.popup-container [role="tooltip"]::after {
+    box-shadow: 0 0 3px 0 #00000066;
+    z-index: -1;
+}
+
+
+.popup-container.hover:hover>[role="tooltip"],
+.popup-container>.focused:focus+[role="tooltip"] {
+    display: inline-block;
+}
+
 /* Popover */
 
-.popover-container [role="status"] {
+.popup-container [role="status"] {
     display: none;
     position: absolute;
     left: 100%;
@@ -338,20 +287,20 @@ Array.from(document.querySelectorAll('[title]')).forEach((el) => {
     width: max-content;
     max-width: 25em;
     margin-left: 0.2rem;
-    z-index: 1;
+    z-index: 6;
 }
 
-.popover-container [role="status"] span {
+.popup-container [role="status"] span {
     display: block;
-    padding: 0.25rem 0.5rem;
+    padding: 0.75rem 1rem;
     background: #fff;
     color: #000;
     border-radius: 0.25rem;
     box-shadow: 0 0 3px 0 #00000066;
 }
 
-.popover-container [role="status"]::before,
-.popover-container [role="status"]::after {
+.popup-container [role="status"]::before,
+.popup-container [role="status"]::after {
     content: '';
     display: block;
     width: 0;
@@ -363,72 +312,153 @@ Array.from(document.querySelectorAll('[title]')).forEach((el) => {
     transform: translate(50%, -50%) rotate(45deg);
 }
 
-.popover-container [role="status"]::after {
+.popup-container [role="status"]::after {
     box-shadow: 0 0 3px 0 #00000066;
     z-index: -1;
 }
 
-.popover-container {
-    display: inline-block;
-    position: relative;
-}
-
-.popover-container.open>[role="status"] {
+.popup-container.open>[role="status"] {
     display: inline-block;
 }</pre>
                         </div>
                         <div class="card h-100 overflow-hidden">
                             <div class="card-header">
-                                <h4 class="card-title h5 mb-0">JS</h4>
+                                <h3 class="card-title h5 mb-0">JS</h3>
                             </div>
                             <pre class="card-body text-bg-dark mh-15 mb-0">
-// Iterate over them
-Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
-    // Get the message from the data-content element
-    var popoverContainer = document.createElement('span');
-    popoverContainer.classList.add('popover-container');
+class Popup {
+    constructor(domNode) {
+        var container;
 
-    el.after(popoverContainer);
-    popoverContainer.append(el);
-    popoverContainer.innerHTML += '<span role="status"><span></span></span>';
-    el = popoverContainer.querySelector('[data-popover]');
+        container = document.createElement('span');
+        container.classList.add('popup-container');
+        domNode.after(container);
+        container.append(domNode);
 
-    // Get the live region element
-    var liveRegion = popoverContainer.querySelector('[role="status"]').querySelector('span');
+        // Get the message from the title or data-popover element
+        if (domNode.hasAttribute('title')) {
+            container.innerHTML += '&lt;span role="tooltip" aria-hidden="true"&gt;&lt;span&gt;' + domNode.getAttribute('title') + '&lt;/span&gt;&lt;/span&gt;';
+            domNode = container.querySelector('[title]');
+        }
+
+        if (domNode.hasAttribute('data-popover')) {
+            container.innerHTML += '&lt;span&gt; role="status"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;';
+            domNode = container.querySelector('[data-popover]');
+            domNode.setAttribute('aria-pressed', false);
+        }
+    }
+}
+
+class Tooltip {
+    constructor(domNode) {
+        this.tooltipNode = domNode;
+        this.tooltipNode.parentNode.addEventListener('mouseover', () => this.onMouseover(event));
+        this.tooltipNode.parentNode.addEventListener('mouseleave', () => this.onMouseleave(event));
+        this.tooltipNode.addEventListener('focus', () => this.onFocus(event));
+        this.tooltipNode.addEventListener('blur', () => this.onBlur(event));
+        document.addEventListener('keydown', () => this.onKeydown(event));
+        domNode.removeAttribute('title');
+    }
 
     // Toggle the message
-    el.addEventListener('click', e => {
-        if (popoverContainer.classList.contains('open')) {
-            popoverContainer.classList.remove('open');
-            liveRegion.innerText = '';
-            el.setAttribute('aria-pressed', false);
-        } else {
-            popoverContainer.classList.add('open');
-            window.setTimeout(() => {
-                liveRegion.innerText = el.getAttribute('data-popover');
-            }, 1);
-            el.setAttribute('aria-pressed', true);
-        }
-    });
+    onMouseover(event) {
+        event.currentTarget.classList.add('hover');
+    }
 
-    // Close on outside click
-    document.addEventListener('click', e => {
-        if (!popoverContainer.contains(e.target)) {
-            popoverContainer.classList.remove('open');
-            liveRegion.innerText = '';
-            el.setAttribute('aria-pressed', false);
-        }
-    });
+    onMouseleave(event) {
+        event.currentTarget.classList.remove('hover');
+    }
+
+    // Close on outside
+    onFocus(event) {
+        event.currentTarget.classList.add('focused');
+    }
+
+    onBlur(event) {
+        event.currentTarget.classList.remove('focused');
+    }
 
     // Remove tooltip on ESC
-    document.addEventListener('keydown', function (e) {
-        if ((e.keyCode || e.which) === 27) {
-            popoverContainer.classList.remove('open');
-            liveRegion.innerText = '';
-            el.setAttribute('aria-pressed', false);
+    onKeydown(event) {
+        if ((event.keyCode || event.which) === 27) {
+            Array.from(document.querySelectorAll('.popup-container')).forEach((el) => {
+                el.classList.remove('hover');
+                el.firstChild.classList.remove('focused');
+            });
         }
-    });
-});</pre>
+    }
+}
+
+class Popover {
+    constructor(domNode) {
+        this.popoverNode = domNode;
+        this.popoverNode.addEventListener('click', () => this.onClick(event));
+        document.addEventListener('click', () => this.onClickOut(event));
+        document.addEventListener('keydown', () => this.onKeydown(event));
+    }
+
+    // Toggle the message
+    onClick(event) {
+        if (event.currentTarget.parentNode.classList.contains('open')) {
+            event.currentTarget.parentNode.classList.remove('open');
+            event.currentTarget.parentNode.querySelector('[role="status"]').querySelector('span').innerText = '';
+        } else {
+            event.currentTarget.parentNode.classList.add('open');
+            var el = event.currentTarget.parentNode.querySelector('[role="status"]').querySelector('span');
+            var text = event.currentTarget.dataset.popover;
+            setTimeout(() => {
+                el.innerText = text;
+            }, 1);
+        }
+    }
+
+    // Close on outside click
+    onClickOut(event) {
+        Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
+            if (!el.parentNode.contains(event.target)) {
+                el.parentNode.classList.remove('open');
+                el.parentNode.querySelector('[role="status"]').querySelector('span').innerText = '';
+                el.setAttribute('aria-pressed', false);
+            }
+        });
+    }
+
+    // Remove popover on ESC
+    onKeydown(event) {
+        if ((event.keyCode || event.which) === 27) {
+            Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
+                el.parentNode.classList.remove('open');
+                el.parentNode.querySelector('[role="status"]').querySelector('span').innerText = '';
+                el.setAttribute('aria-pressed', false);
+            });
+        }
+    }
+}
+
+class Pressed {
+    constructor(domNode) {
+        this.switchNode = domNode;
+        this.switchNode.addEventListener('click', () => this.onClick(event));
+    }
+
+    onClick(event) {
+        if (event.currentTarget.getAttribute('aria-pressed') === 'true') {
+            event.currentTarget.setAttribute('aria-pressed', false);
+        } else {
+            event.currentTarget.setAttribute('aria-pressed', true);
+        }
+    }
+}
+
+(function () {
+    window.setTimeout(() => {
+        // Iterate over them
+        Array.from(document.querySelectorAll('[title], [data-popover]')).forEach((el) => new Popup(el));
+        Array.from(document.querySelectorAll('[title]')).forEach((el) => new Tooltip(el));
+        Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => new Popover(el));
+        Array.from(document.querySelectorAll('[aria-pressed]')).forEach((el) => new Pressed(el));
+    }, 100);
+}());</pre>
                         </div>
                     </div>
                 </div>
@@ -436,7 +466,7 @@ Array.from(document.querySelectorAll('[data-popover]')).forEach((el) => {
             </div>
         </div>
     </main>
-    <div id="footer"></div>
+    <div id="footer" class="mt-auto"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

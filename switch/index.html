@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conmutadores | A11Y</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="min-vh-100 vstack">
+    <a href="#main"
+        class="btn btn-primary fixed-top top-0 start-50 translate-middle-x mt-4 visually-hidden-focusable">Saltar
+        al contenido principal</a>
+    <div id="header" class="sticky-top"></div>
+    <main id="main" class="py-5 text-bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-xl-2 g-5">
+                <div class="col col-xl-9 vstack gap-3">
+                    <h1 class="display-5 border-bottom pb-3">Ejemplo de conmutadores de presión e interruptores</h1>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt tempore modi a ea recusandae esse
+                        ipsum dolore. Voluptatum similique quia iusto reiciendis voluptatibus maiores architecto,
+                        eligendi neque, quasi nostrum amet.</p>
+
+                    <h2 class="border-bottom pb-3"><i class="bi bi-universal-access-circle"></i> Problemas de
+                        accesibilidad más frecuentes</h2>
+                    <dl>
+                        <dt>Acceso exclusivo por ratón</dt>
+                        <dd>Si solo se activa con clics y no con teclado, usuarios de teclado no pueden usarlo. No
+                            proporcionar un equivalente con teclado es un fallo frecuente.</dd>
+                        <dt>Estado no comunicado a tecnologías de asistencia</dt>
+                        <dd>Para el switch, el estado (on/off) no siempre se anuncia correctamente. En el caso de
+                            contraseñas, el estado "oculto" vs "visible" debe ser claro para tecnologías de asistencia.
+                        </dd>
+                        <dt>Foco y foco visible no gestionados correctamente</dt>
+                        <dd>No mover el foco adecuadamente al cambiar de estado o no indicar visualmente cuál control
+                            tiene foco.</dd>
+                        <dt>Etiqueta inadecuada o rol ausente</dt>
+                        <dd>Mal empleo de los roles como no usar switch para un interruptor, o no usar aria-pressed para
+                            un conmutador de presión.</dd>
+                    </dl>
+
+                    <h2 class="border-bottom pb-3"><i class="bi bi-ui-checks"></i> Mejores prácticas para mejorar la
+                        accesibilidad</h2>
+                    <h3 class="h4 fw-bold">Soporte de teclado</h3>
+                    <ul>
+                        <li>Usa un control interactivo para mostrar/ocultar como un <code>button</code> nativo con un
+                            icono (<i class="bi bi-eye"></i>/<i class="bi bi-eye-slash"></i>) y que disponga tanto de un
+                            <code>title</code> como de un texto accesible descriptivos. También existe la opción de
+                            hacer esa descripción dinámica (Mostrar contraseña/Ocultar contraseña). El botón debe ser
+                            enfocable y operable con <kbd>Enter</kbd>/<kbd>Space</kbd>.
+                        </li>
+                        <li>Puede ser un botón con <code>role="switch"</code> o un control nativo como un
+                            <code>checkbox</code>.
+                        </li>
+                    </ul>
+                    <h3 class="h4 fw-bold">Roles y atributos ARIA adecuados</h3>
+                    <ul>
+                        <li>
+                            <strong>Presión:</strong>
+                            <ul>
+                                <li>El botón que haga de conmutador de presión debe indicar el estado actual utilizando
+                                    <code>aria-pressed</code>.
+                                </li>
+                                <li>Al hacer clic o presionar <kbd>Space</kbd>/<kbd>Enter</kbd> en el botón, cambia a
+                                    <code>aria-pressed="true"</code>.
+                                </li>
+                                <li>Actualizar <code>aria-label</code> y <code>title</code> a "Ocultar contraseña".</li>
+                                <li>Al volver a hacer clic o presionar <kbd>Space</kbd>/<kbd>Enter</kbd>, cambia a
+                                    <code>aria-pressed="false"</code>.
+                                </li>
+                                <li>Actualizar de nuevo <code>aria-label</code> y <code>title</code> a "Mostrar
+                                    contraseña".</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Interruptor:</strong>
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h2 class="border-bottom pb-3"><i class="bi bi-grid-1x2-fill"></i> Ejemplos de uso</h2>
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header text-body-secondary">
+                                    <h2 class="card-title h5 mb-0">Conmutador de presión</h2>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Un <strong>conmutador de presión (toggle)</strong> es un botón
+                                        que alterna entre ocultar/mostrar un valor sensible (por ejemplo, una
+                                        contraseña). A veces se implementa con un icono o con texto como
+                                        "Mostrar/Ocultar".
+                                    </p>
+                                </div>
+                                <div class="card-footer text-body-secondary p-3">
+                                    <label for="password-1" class="form-label">Contraseña:</label>
+                                    <div class="position-relative">
+                                        <input type="password" name="password" id="password-1"
+                                            class="form-control flex-">
+                                        <div class="position-absolute top-0 end-0">
+                                            <button type="button" class="btn btn-link" aria-label="Mostrar contraseña"
+                                                title="Mostrar contraseña" aria-pressed="false"
+                                                data-target="password-1"><i class="bi bi-eye"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header text-body-secondary">
+                                    <h2 class="card-title h5 mb-0">Interruptor</h2>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Un <strong>interruptor (switch)</strong> es un control de tipo
+                                        conmutador que representa un estado binario (encendido/apagado). Suele mostrarse
+                                        como un interruptor deslizante.
+                                    </p>
+                                </div>
+                                <div class="card-footer text-body-secondary p-3">
+                                    <fieldset class="vstack gap-2">
+                                        <legend>Accessibility Preferences</legend>
+                                        <div class="hstack justify-content-between">
+                                            <label for="id-switch-1" class="flex-fill">Reduced motion</label>
+                                            <input id="id-switch-1" type="checkbox" role="switch">
+                                        </div>
+                                        <div class="hstack justify-content-between">
+                                            <label for="id-switch-2" class="flex-fill">Show captions</label>
+                                            <input id="id-switch-2" type="checkbox" role="switch">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="border-bottom pb-3"><i class="bi bi-code-square"></i> Código generado</h2>
+                    <div class="vstack gap-3">
+                        <div class="card h-100 overflow-hidden">
+                            <div class="card-header">
+                                <h3 class="card-title h5 mb-0">HTML</h3>
+                            </div>
+                            <pre class="card-body text-bg-dark mh-15 mb-0">
+&lt;!-- Conmutador de presión --&gt;
+
+&lt;label&gt; for="password-1" class="form-label"&gt;Contraseña:&lt;/label&gt;
+&lt;div class="position-relative"&gt;
+    &lt;input type="password" name="password" id="password-1"
+        class="form-control flex-"&gt;
+    &lt;div class="position-absolute top-0 end-0"&gt;
+        &lt;button type="button" class="btn btn-link" aria-label="Mostrar contraseña"
+            title="Mostrar contraseña" aria-pressed="false"
+            data-target="password-1"&gt;&lt;i&gt; class="bi bi-eye"&gt;&lt;/i&gt;&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Interruptor --&gt;
+
+&lt;fieldset class="vstack gap-2"&gt;
+    &lt;legend&gt;Accessibility Preferences&lt;/legend&gt;
+    &lt;div class="hstack justify-content-between"&gt;
+        &lt;label&gt; for="id-switch-1" class="flex-fill"&gt;Reduced motion&lt;/label&gt;
+        &lt;input id="id-switch-1" type="checkbox" role="switch"&gt;
+    &lt;/div&gt;
+    &lt;div class="hstack justify-content-between"&gt;
+        &lt;label&gt; for="id-switch-2" class="flex-fill"&gt;Show captions&lt;/label&gt;
+        &lt;input id="id-switch-2" type="checkbox" role="switch"&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+                                </pre>
+                        </div>
+                        <div class="card h-100 overflow-hidden">
+                            <div class="card-header">
+                                <h3 class="card-title h5 mb-0">CSS</h3>
+                            </div>
+                            <pre class="card-body text-bg-dark mh-15 mb-0">
+/* Switch */
+
+[role="switch"] {
+    flex-shrink: 0;
+    height: 1.5em;
+    vertical-align: text-bottom;
+    appearance: none;
+    cursor: pointer;
+    width: 2.5em;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    background-color: #3f3f3f;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 2em;
+    transition: background-position .15s ease-in-out;
+}
+
+[role="switch"]:checked {
+    background-color: #198754;
+    background-position: right center;
+}</pre>
+                        </div>
+                        <div class="card h-100 overflow-hidden">
+                            <div class="card-header">
+                                <h3 class="card-title h5 mb-0">JS</h3>
+                            </div>
+                            <pre class="card-body text-bg-dark mh-15 mb-0">
+class Popup {
+    constructor(domNode) {
+        var container;
+
+        container = document.createElement('span');
+        container.classList.add('popup-container');
+        domNode.after(container);
+        container.append(domNode);
+
+        // Get the message from the title or data-popover element
+        if (domNode.hasAttribute('title')) {
+            container.innerHTML += '<span role="tooltip" aria-hidden="true"><span>' + domNode.getAttribute('title') + '</span></span>';
+            domNode = container.querySelector('[title]');
+        }
+
+        if (domNode.hasAttribute('data-popover')) {
+            container.innerHTML += '<span role="status"><span></span></span>';
+            domNode = container.querySelector('[data-popover]');
+            domNode.setAttribute('aria-pressed', false);
+        }
+    }
+}
+
+class Tooltip {
+    constructor(domNode) {
+        this.tooltipNode = domNode;
+        this.tooltipNode.parentNode.addEventListener('mouseover', () => this.onMouseover(event));
+        this.tooltipNode.parentNode.addEventListener('mouseleave', () => this.onMouseleave(event));
+        this.tooltipNode.addEventListener('focus', () => this.onFocus(event));
+        this.tooltipNode.addEventListener('blur', () => this.onBlur(event));
+        document.addEventListener('keydown', () => this.onKeydown(event));
+        domNode.removeAttribute('title');
+    }
+
+    // Toggle the message
+    onMouseover(event) {
+        event.currentTarget.classList.add('hover');
+    }
+
+    onMouseleave(event) {
+        event.currentTarget.classList.remove('hover');
+    }
+
+    // Close on outside
+    onFocus(event) {
+        event.currentTarget.classList.add('focused');
+    }
+
+    onBlur(event) {
+        event.currentTarget.classList.remove('focused');
+    }
+
+    // Remove tooltip on ESC
+    onKeydown(event) {
+        if ((event.keyCode || event.which) === 27) {
+            Array.from(document.querySelectorAll('.popup-container')).forEach((el) => {
+                el.classList.remove('hover');
+                el.firstChild.classList.remove('focused');
+            });
+        }
+    }
+}
+
+class Pressed {
+    constructor(domNode) {
+        this.switchNode = domNode;
+        this.switchNode.addEventListener('click', () => this.onClick(event));
+    }
+
+    onClick(event) {
+        if (event.currentTarget.getAttribute('aria-pressed') === 'true') {
+            event.currentTarget.setAttribute('aria-pressed', false);
+        } else {
+            event.currentTarget.setAttribute('aria-pressed', true);
+        }
+    }
+}
+
+class PasswordViewer {
+    constructor(domNode) {
+        this.switchNode = domNode;
+        this.switchNode.addEventListener('click', () => this.onClick(event));
+    }
+
+    onClick(event) {
+        if (event.currentTarget.getAttribute('aria-pressed') === 'false') {
+            event.currentTarget.setAttribute('aria-label', 'Mostrar contraseña');
+            event.currentTarget.parentNode.lastChild.lastChild.innerText = 'Mostrar contraseña';
+            event.currentTarget.firstChild.classList.add('bi-eye');
+            event.currentTarget.firstChild.classList.remove('bi-eye-slash');
+            document.getElementById(event.currentTarget.dataset.target).setAttribute('type', 'password');
+        } else {
+            event.currentTarget.setAttribute('aria-label', 'Ocultar contraseña');
+            event.currentTarget.parentNode.lastChild.lastChild.innerText = 'Ocultar contraseña';
+            event.currentTarget.firstChild.classList.add('bi-eye-slash');
+            event.currentTarget.firstChild.classList.remove('bi-eye');
+            document.getElementById(event.currentTarget.dataset.target).setAttribute('type', 'text');
+        }
+    }
+}
+
+(function () {
+    window.setTimeout(() => {
+        // Iterate over them
+        Array.from(document.querySelectorAll('[title], [data-popover]')).forEach((el) => new Popup(el));
+        Array.from(document.querySelectorAll('[title]')).forEach((el) => new Tooltip(el));
+        Array.from(document.querySelectorAll('[aria-pressed]')).forEach((el) => new Pressed(el));
+        Array.from(document.querySelectorAll('[type="password"] + * [aria-pressed]')).forEach((el) => new PasswordViewer(el));
+    }, 100);
+}());</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-xl-3"></div>
+            </div>
+        </div>
+    </main>
+    <div id="footer" class="mt-auto"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../custom.js"></script>
+</body>
+
+</html>
