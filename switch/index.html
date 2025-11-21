@@ -21,10 +21,13 @@
             <div class="row row-cols-1 row-cols-xl-2 g-5">
                 <div class="col col-xl-9 vstack gap-3">
                     <h1 class="display-5 border-bottom pb-3">Ejemplo de conmutadores de presión e interruptores</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt tempore modi a ea recusandae esse
-                        ipsum dolore. Voluptatum similique quia iusto reiciendis voluptatibus maiores architecto,
-                        eligendi neque, quasi nostrum amet.</p>
-
+                    <p>Los conmutadores son componentes que no solo quedan atractivos visualmente, también tienen su
+                        utilidad en lo referente a la accesibilidad. Si están debidamente implementados los
+                        <strong>conmutadores de presión</strong> dan una semántica especial a aquellas funcionalidades
+                        que suponen cambios en la interfaz y pueden ser activadas y desactivadas a voluntad. Si se trata
+                        de <strong>interruptores</strong>, estos sustituyen a una simple casilla de verificación,
+                        pudiendo aplicar opciones de configuración enviando datos directamente con su activación
+                        mediante un servicio, de forma asíncrona y sin tener que enviar un formulario expresamente.</p>
                     <h2 class="border-bottom pb-3"><i class="bi bi-universal-access-circle"></i> Problemas de
                         accesibilidad más frecuentes</h2>
                     <dl>
@@ -79,7 +82,13 @@
                         <li>
                             <strong>Interruptor:</strong>
                             <ul>
-                                <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+                                <li>Usar siempre <code>role="switch"</code>, independientemente de si es o no un
+                                    elemento nativo. </li>
+                                <li>Si usas un botón nativo, puedes usar el atributo
+                                    <code>aria-checked="true/false"</code> para indicar su estado.
+                                </li>
+                                <li>Si usas un elemento no interactivo, usar además <code>tabindex="0"</code> para que
+                                    lo sea.</li>
                             </ul>
                         </li>
                     </ul>
